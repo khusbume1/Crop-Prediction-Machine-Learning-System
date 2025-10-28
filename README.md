@@ -2,7 +2,7 @@
 
 A comprehensive machine learning system for predicting crop yields using weather data, satellite imagery, and historical crop production data.
 
-## 🌾 Overview
+##  Overview
 
 This project implements multiple ML models (traditional and deep learning) to predict crop yields by integrating:
 - **Weather Data**: Temperature, precipitation, humidity, growing degree days
@@ -11,7 +11,7 @@ This project implements multiple ML models (traditional and deep learning) to pr
 - **Soil Data**: Soil type, moisture, nutrient levels
 - **Climate Indices**: ENSO, NAO, PDO
 
-## 📊 Available Data Sources
+##  Available Data Sources
 
 ### 1. **USDA NASS (National Agricultural Statistics Service)**
 - **Quick Stats API**: Comprehensive crop statistics (1997-present)
@@ -38,7 +38,7 @@ This project implements multiple ML models (traditional and deep learning) to pr
 - **GlobalCropYield5min**: Historical yields (1982-2015) at 5-min resolution
 - **FAO Statistics**: Global agricultural data
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 crop_prediction_ml/
@@ -59,7 +59,7 @@ crop_prediction_ml/
 └── tests/              # Unit tests
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Installation
 
@@ -108,7 +108,7 @@ python src/models/train_model.py --model random_forest --crop corn
 python src/models/predict.py --model best_model --year 2024
 ```
 
-## 🤖 Implemented Models
+## Implemented Models
 
 ### Traditional Machine Learning
 - **Linear Regression**: Baseline model
@@ -128,7 +128,7 @@ python src/models/predict.py --model best_model --year 2024
 - **Stacking**: Combines multiple models
 - **Voting**: Weighted average of predictions
 
-## 📈 Model Performance
+##  Model Performance
 
 Based on research literature:
 - **Target Accuracy**: 85-95% (R² = 0.70-0.95)
@@ -159,14 +159,14 @@ Based on research literature:
 - Residual analysis
 - Spatial validation
 
-## 📚 Research References
+## Research References
 
 1. **CropNet Dataset**: Multi-modal dataset with Sentinel-2, WRF-HRRR, and USDA data
 2. **EOSDA**: Commercial crop yield prediction achieving 95% accuracy
 3. **Michigan State Study**: Landsat + drought index for sub-field predictions
 4. **Global Yield Mapping**: ML models for maize, rice, wheat, soybean (1982-2015)
 
-## 🌍 Example Use Cases
+## Example Use Cases
 
 1. **Farm Management**: Field-level yield forecasting
 2. **Food Security**: National/regional production estimates
@@ -174,7 +174,7 @@ Based on research literature:
 4. **Market Analysis**: Price forecasting
 5. **Climate Research**: Impact assessment
 
-## 📊 Sample Results
+## Sample Results
 
 ```python
 # Example: Corn yield prediction for 2023
@@ -185,7 +185,7 @@ MAE: 9.8 bushels/acre
 Prediction Window: 2 months before harvest
 ```
 
-## 🔬 Advanced Features
+## Advanced Features
 
 - **Multi-crop support**: Corn, soybeans, wheat, rice, cotton
 - **Multi-scale predictions**: Field, county, state, national
@@ -193,19 +193,19 @@ Prediction Window: 2 months before harvest
 - **Uncertainty quantification**: Prediction intervals
 - **Explainable AI**: SHAP values for feature interpretation
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please see `CONTRIBUTING.md` for guidelines.
 
-## 📝 License
+##  License
 
 MIT License - See LICENSE file for details
 
-## 📧 Contact
+##  Contact
 
 For questions or collaborations, please open an issue on GitHub.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - USDA NASS for agricultural data
 - NASA for satellite imagery
