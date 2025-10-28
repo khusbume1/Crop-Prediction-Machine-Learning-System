@@ -1,0 +1,224 @@
+# Crop Prediction ML Configuration File
+# Copy this to config.yaml and add your API keys
+
+# API Keys (Required - Get free keys from respective services)
+api_keys:
+  usda_nass: "YOUR_USDA_NASS_API_KEY"  # Get from: https://quickstats.nass.usda.gov/api
+  nasa_earthdata: "YOUR_NASA_TOKEN"    # Get from: https://urs.earthdata.nasa.gov/
+  google_earth_engine: true             # Requires Google account authentication
+  
+# Data Collection Settings
+data_collection:
+  # Geographic extent
+  regions:
+    - "Iowa"
+    - "Illinois" 
+    - "Nebraska"
+    - "Kansas"
+  
+  # Temporal extent
+  years:
+    start: 2015
+    end: 2023
+  
+  # Crops to analyze
+  crops:
+    - "CORN"
+    - "SOYBEANS"
+    - "WHEAT"
+    - "COTTON"
+  
+  # Data sources to use
+  sources:
+    usda_nass: true
+    satellite: true
+    weather: true
+    soil: true
+
+# Satellite Data Settings
+satellite:
+  # Platforms
+  platforms:
+    modis: true
+    landsat: true
+    sentinel2: true
+  
+  # Indices to calculate
+  indices:
+    - "NDVI"
+    - "EVI"
+    - "NDWI"
+    - "GNDVI"
+  
+  # Resolution (meters)
+  resolution: 250
+  
+  # Cloud coverage threshold (%)
+  max_cloud_cover: 20
+
+# Weather Data Settings
+weather:
+  variables:
+    - "temperature_max"
+    - "temperature_min"
+    - "temperature_mean"
+    - "precipitation"
+    - "humidity"
+    - "solar_radiation"
+    - "wind_speed"
+  
+  # Climate indices
+  climate_indices:
+    - "ENSO"
+    - "NAO"
+    - "PDO"
+    - "IOD"
+
+# Feature Engineering
+features:
+  # Growing season months
+  growing_season:
+    corn: [4, 5, 6, 7, 8, 9]
+    soybeans: [5, 6, 7, 8, 9]
+    wheat: [3, 4, 5, 6]
+  
+  # Aggregation methods
+  aggregations:
+    - "mean"
+    - "sum"
+    - "max"
+    - "min"
+    - "std"
+  
+  # Derived features
+  derived:
+    growing_degree_days: true
+    cumulative_precipitation: true
+    drought_index: true
+    heat_stress_index: true
+
+# Model Training Settings
+models:
+  # Train/test split
+  test_size: 0.2
+  validation_size: 0.1
+  
+  # Cross-validation
+  cv_folds: 5
+  cv_strategy: "time_series"  # or "spatial" or "stratified"
+  
+  # Models to train
+  algorithms:
+    - "linear_regression"
+    - "random_forest"
+    - "xgboost"
+    - "lightgbm"
+    - "svr"
+    - "mlp"
+    - "lstm"
+    - "cnn_lstm"
+  
+  # Hyperparameter tuning
+  hyperparameter_tuning:
+    enabled: true
+    method: "grid_search"  # or "random_search" or "bayesian"
+    cv_folds: 3
+  
+  # Early stopping for neural networks
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+
+# Random Forest Hyperparameters
+random_forest:
+  n_estimators: [100, 200, 300]
+  max_depth: [10, 20, 30, null]
+  min_samples_split: [2, 5, 10]
+  min_samples_leaf: [1, 2, 4]
+
+# XGBoost Hyperparameters
+xgboost:
+  n_estimators: [100, 200, 300]
+  max_depth: [3, 5, 7, 9]
+  learning_rate: [0.01, 0.05, 0.1]
+  subsample: [0.8, 0.9, 1.0]
+  colsample_bytree: [0.8, 0.9, 1.0]
+
+# LightGBM Hyperparameters
+lightgbm:
+  n_estimators: [100, 200, 300]
+  max_depth: [5, 10, 15, -1]
+  learning_rate: [0.01, 0.05, 0.1]
+  num_leaves: [31, 50, 70]
+
+# Neural Network Hyperparameters
+mlp:
+  hidden_layers: [[128, 64], [256, 128, 64]]
+  learning_rate: [0.001, 0.01]
+  batch_size: [32, 64, 128]
+  epochs: 100
+  dropout: [0.2, 0.3]
+
+# LSTM Hyperparameters
+lstm:
+  units: [64, 128, 256]
+  layers: [1, 2, 3]
+  dropout: [0.2, 0.3]
+  learning_rate: [0.001, 0.01]
+  batch_size: [32, 64]
+  epochs: 100
+
+# Evaluation Metrics
+evaluation:
+  metrics:
+    - "rmse"
+    - "mae"
+    - "r2"
+    - "mape"
+    - "mase"
+  
+  # Feature importance
+  feature_importance:
+    enabled: true
+    method: "shap"  # or "permutation" or "builtin"
+  
+  # Visualization
+  visualizations:
+    - "actual_vs_predicted"
+    - "residual_plot"
+    - "feature_importance"
+    - "spatial_map"
+    - "temporal_trend"
+
+# Output Settings
+output:
+  # Save paths
+  models_dir: "models"
+  predictions_dir: "outputs/predictions"
+  visualizations_dir: "outputs/visualizations"
+  logs_dir: "logs"
+  
+  # Model saving
+  save_models: true
+  save_predictions: true
+  save_feature_importance: true
+  
+  # Export formats
+  export_formats:
+    - "csv"
+    - "parquet"
+    - "json"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/crop_prediction.log"
+
+# Performance
+performance:
+  n_jobs: -1  # -1 for all cores
+  cache_data: true
+  use_gpu: true  # If available
+  batch_processing: true
