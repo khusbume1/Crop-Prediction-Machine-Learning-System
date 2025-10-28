@@ -1,6 +1,7 @@
 # Crop-Prediction-Machine-Learning-System
 Crop Prediction Machine Learning System
 
+Crop Prediction Machine Learning System
 A comprehensive machine learning system for predicting crop yields using weather data, satellite imagery, and historical crop production data.
 🌾 Overview
 This project implements multiple ML models (traditional and deep learning) to predict crop yields by integrating:
@@ -177,4 +178,4 @@ For questions or collaborations, please open an issue on GitHub.
 
 USDA NASS for agricultural data
 NASA for satellite imagery
-Research community for datasets and methodologies
+Research community for datasets and methodologiess
