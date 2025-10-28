@@ -1,48 +1,46 @@
-# Crop-Prediction-Machine-Learning-System
-Crop Prediction Machine Learning System
+# Crop Prediction Machine Learning System
 
-Crop Prediction Machine Learning System
 A comprehensive machine learning system for predicting crop yields using weather data, satellite imagery, and historical crop production data.
-🌾 Overview
+
+## 🌾 Overview
+
 This project implements multiple ML models (traditional and deep learning) to predict crop yields by integrating:
+- **Weather Data**: Temperature, precipitation, humidity, growing degree days
+- **Satellite Data**: NDVI, EVI, soil moisture indices
+- **Historical Crop Data**: Yield statistics, planting areas, harvest data
+- **Soil Data**: Soil type, moisture, nutrient levels
+- **Climate Indices**: ENSO, NAO, PDO
 
-Weather Data: Temperature, precipitation, humidity, growing degree days
-Satellite Data: NDVI, EVI, soil moisture indices
-Historical Crop Data: Yield statistics, planting areas, harvest data
-Soil Data: Soil type, moisture, nutrient levels
-Climate Indices: ENSO, NAO, PDO
+## 📊 Available Data Sources
 
-📊 Available Data Sources
-1. USDA NASS (National Agricultural Statistics Service)
+### 1. **USDA NASS (National Agricultural Statistics Service)**
+- **Quick Stats API**: Comprehensive crop statistics (1997-present)
+- **Cropland Data Layer (CDL)**: 30m resolution satellite-based crop classification
+- **VegScape**: 250m vegetation condition monitoring
+- **Crop-CASMA**: Soil moisture and vegetation analytics
+- **API Key**: Required (free) - https://quickstats.nass.usda.gov/api
 
-Quick Stats API: Comprehensive crop statistics (1997-present)
-Cropland Data Layer (CDL): 30m resolution satellite-based crop classification
-VegScape: 250m vegetation condition monitoring
-Crop-CASMA: Soil moisture and vegetation analytics
-API Key: Required (free) - https://quickstats.nass.usda.gov/api
+### 2. **NASA & Satellite Data**
+- **MODIS**: Vegetation indices (NDVI, EVI) - 250m/500m resolution
+- **Landsat**: Multi-spectral imagery - 30m resolution
+- **Sentinel-2**: High-resolution imagery - 10m resolution
+- **SMAP**: Soil moisture data
+- **Google Earth Engine**: Integrated access platform
 
-2. NASA & Satellite Data
+### 3. **Weather Data**
+- **NOAA**: Historical weather data
+- **NASA POWER**: Solar radiation, temperature, precipitation
+- **WRF-HRRR**: High-resolution weather forecasts
+- **Climate Indices**: ENSO, NAO, PDO, IOD
 
-MODIS: Vegetation indices (NDVI, EVI) - 250m/500m resolution
-Landsat: Multi-spectral imagery - 30m resolution
-Sentinel-2: High-resolution imagery - 10m resolution
-SMAP: Soil moisture data
-Google Earth Engine: Integrated access platform
+### 4. **Research Datasets**
+- **CropNet**: Terabyte-sized multi-modal dataset (2017-2022)
+- **GlobalCropYield5min**: Historical yields (1982-2015) at 5-min resolution
+- **FAO Statistics**: Global agricultural data
 
-3. Weather Data
+## 🏗️ Project Structure
 
-NOAA: Historical weather data
-NASA POWER: Solar radiation, temperature, precipitation
-WRF-HRRR: High-resolution weather forecasts
-Climate Indices: ENSO, NAO, PDO, IOD
-
-4. Research Datasets
-
-CropNet: Terabyte-sized multi-modal dataset (2017-2022)
-GlobalCropYield5min: Historical yields (1982-2015) at 5-min resolution
-FAO Statistics: Global agricultural data
-
-🏗️ Project Structure
+```
 crop_prediction_ml/
 ├── data/                  # Data storage
 │   ├── raw/              # Raw downloaded data
@@ -59,123 +57,156 @@ crop_prediction_ml/
 ├── outputs/            # Predictions, visualizations
 ├── config/             # Configuration files
 └── tests/              # Unit tests
-🚀 Quick Start
-1. Installation
-bashpip install -r requirements.txt
-2. Configure API Keys
-Edit config/config.yaml:
-yamlapi_keys:
+```
+
+## 🚀 Quick Start
+
+### 1. Installation
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2. Configure API Keys
+
+Edit `config/config.yaml`:
+```yaml
+api_keys:
   usda_nass: "YOUR_API_KEY_HERE"
   nasa_earthdata: "YOUR_TOKEN_HERE"
-3. Download Data
-bash# Download USDA crop data
+```
+
+### 3. Download Data
+
+```bash
+# Download USDA crop data
 python src/data_collection/usda_collector.py --crop corn --years 2015-2023
 
 # Download satellite data
 python src/data_collection/satellite_collector.py --region midwest --years 2020-2023
-4. Preprocess Data
-bashpython src/preprocessing/preprocess_all.py
-5. Train Models
-bash# Train all models
+```
+
+### 4. Preprocess Data
+
+```bash
+python src/preprocessing/preprocess_all.py
+```
+
+### 5. Train Models
+
+```bash
+# Train all models
 python src/models/train_all_models.py
 
 # Train specific model
 python src/models/train_model.py --model random_forest --crop corn
-6. Make Predictions
-bashpython src/models/predict.py --model best_model --year 2024
-🤖 Implemented Models
-Traditional Machine Learning
+```
 
-Linear Regression: Baseline model
-Random Forest: Ensemble tree-based model
-XGBoost: Gradient boosting
-LightGBM: Fast gradient boosting
-Support Vector Regression (SVR): Kernel-based regression
+### 6. Make Predictions
 
-Deep Learning
+```bash
+python src/models/predict.py --model best_model --year 2024
+```
 
-Multi-Layer Perceptron (MLP): Neural network for tabular data
-CNN: For satellite image analysis
-LSTM: For time-series weather data
-CNN-LSTM Hybrid: Combined spatial and temporal features
-Transformer: Attention-based architecture
+## 🤖 Implemented Models
 
-Ensemble Methods
+### Traditional Machine Learning
+- **Linear Regression**: Baseline model
+- **Random Forest**: Ensemble tree-based model
+- **XGBoost**: Gradient boosting
+- **LightGBM**: Fast gradient boosting
+- **Support Vector Regression (SVR)**: Kernel-based regression
 
-Stacking: Combines multiple models
-Voting: Weighted average of predictions
+### Deep Learning
+- **Multi-Layer Perceptron (MLP)**: Neural network for tabular data
+- **CNN**: For satellite image analysis
+- **LSTM**: For time-series weather data
+- **CNN-LSTM Hybrid**: Combined spatial and temporal features
+- **Transformer**: Attention-based architecture
 
-📈 Model Performance
+### Ensemble Methods
+- **Stacking**: Combines multiple models
+- **Voting**: Weighted average of predictions
+
+## 📈 Model Performance
+
 Based on research literature:
+- **Target Accuracy**: 85-95% (R² = 0.70-0.95)
+- **Prediction Window**: Up to 3 months before harvest
+- **Best Models**: XGBoost, Random Forest, CNN-LSTM
 
-Target Accuracy: 85-95% (R² = 0.70-0.95)
-Prediction Window: Up to 3 months before harvest
-Best Models: XGBoost, Random Forest, CNN-LSTM
+## 🔧 Key Features
 
-🔧 Key Features
-Feature Engineering
+### Feature Engineering
+- Growing Degree Days (GDD)
+- Cumulative Precipitation
+- NDVI/EVI time-series statistics
+- Soil moisture indices
+- Historical yield trends
+- Climate oscillation indices
 
-Growing Degree Days (GDD)
-Cumulative Precipitation
-NDVI/EVI time-series statistics
-Soil moisture indices
-Historical yield trends
-Climate oscillation indices
+### Data Preprocessing
+- Missing value imputation
+- Outlier detection and removal
+- Feature scaling and normalization
+- Temporal alignment
+- Spatial aggregation
 
-Data Preprocessing
+### Model Evaluation
+- Cross-validation (spatial and temporal)
+- Multiple metrics (RMSE, MAE, R², MAPE)
+- Feature importance analysis
+- Residual analysis
+- Spatial validation
 
-Missing value imputation
-Outlier detection and removal
-Feature scaling and normalization
-Temporal alignment
-Spatial aggregation
+## 📚 Research References
 
-Model Evaluation
+1. **CropNet Dataset**: Multi-modal dataset with Sentinel-2, WRF-HRRR, and USDA data
+2. **EOSDA**: Commercial crop yield prediction achieving 95% accuracy
+3. **Michigan State Study**: Landsat + drought index for sub-field predictions
+4. **Global Yield Mapping**: ML models for maize, rice, wheat, soybean (1982-2015)
 
-Cross-validation (spatial and temporal)
-Multiple metrics (RMSE, MAE, R², MAPE)
-Feature importance analysis
-Residual analysis
-Spatial validation
+## 🌍 Example Use Cases
 
-📚 Research References
+1. **Farm Management**: Field-level yield forecasting
+2. **Food Security**: National/regional production estimates
+3. **Insurance**: Crop loss assessment
+4. **Market Analysis**: Price forecasting
+5. **Climate Research**: Impact assessment
 
-CropNet Dataset: Multi-modal dataset with Sentinel-2, WRF-HRRR, and USDA data
-EOSDA: Commercial crop yield prediction achieving 95% accuracy
-Michigan State Study: Landsat + drought index for sub-field predictions
-Global Yield Mapping: ML models for maize, rice, wheat, soybean (1982-2015)
+## 📊 Sample Results
 
-🌍 Example Use Cases
-
-Farm Management: Field-level yield forecasting
-Food Security: National/regional production estimates
-Insurance: Crop loss assessment
-Market Analysis: Price forecasting
-Climate Research: Impact assessment
-
-📊 Sample Results
-python# Example: Corn yield prediction for 2023
+```python
+# Example: Corn yield prediction for 2023
 Model: XGBoost
 R²: 0.89
 RMSE: 12.3 bushels/acre
 MAE: 9.8 bushels/acre
 Prediction Window: 2 months before harvest
-🔬 Advanced Features
+```
 
-Multi-crop support: Corn, soybeans, wheat, rice, cotton
-Multi-scale predictions: Field, county, state, national
-Real-time updates: Integration with live weather feeds
-Uncertainty quantification: Prediction intervals
-Explainable AI: SHAP values for feature interpretation
+## 🔬 Advanced Features
 
-🤝 Contributing
-Contributions are welcome! Please see CONTRIBUTING.md for guidelines.
-📝 License
+- **Multi-crop support**: Corn, soybeans, wheat, rice, cotton
+- **Multi-scale predictions**: Field, county, state, national
+- **Real-time updates**: Integration with live weather feeds
+- **Uncertainty quantification**: Prediction intervals
+- **Explainable AI**: SHAP values for feature interpretation
+
+## 🤝 Contributing
+
+Contributions are welcome! Please see `CONTRIBUTING.md` for guidelines.
+
+## 📝 License
+
 MIT License - See LICENSE file for details
-📧 Contact
-For questions or collaborations, please open an issue on GitHub.
-🙏 Acknowledgments
 
-USDA NASS for agricultural data
-NASA for satellite imagery
-Research community for datasets and methodologiess
+## 📧 Contact
+
+For questions or collaborations, please open an issue on GitHub.
+
+## 🙏 Acknowledgments
+
+- USDA NASS for agricultural data
+- NASA for satellite imagery
+- Research community for datasets and methodologies
